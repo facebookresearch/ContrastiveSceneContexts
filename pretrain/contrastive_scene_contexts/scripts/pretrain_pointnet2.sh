@@ -1,0 +1,31 @@
+#!/bin/bash
+
+MODEL=PointNet2Backbone
+
+python ddp_train.py -m \
+    net.model=$MODEL \
+    net.conv1_kernel_size=3 \
+    net.model_n_out=32 \
+    opt.lr=0.1 \
+    opt.max_iter=100000 \
+    data.dataset=ScanNetMatchPairDataset \
+    data.voxelize=False \
+    trainer.trainer=PartitionPointNCELossTrainerPointNet \
+    trainer.batch_size=32 \
+    trainer.stat_freq=5 \
+    trainer.checkpoint_freq=1000 \
+    trainer.lr_update_freq=1000 \
+    shape_context.r1=0.05 \
+    shape_context.r2=0.5 \
+    shape_context.nbins_xy=2 \
+    shape_context.nbins_zy=2 \
+    shape_context.fast_partition=False \
+    misc.num_gpus=8 \
+    misc.train_num_thread=2 \
+    misc.npos=4096 \
+    misc.nceT=0.4 \
+    misc.out_dir=${OUT_DIR} \
+    hydra.launcher.partition=priority \
+    hydra.launcher.timeout_min=3600 \
+    hydra.launcher.max_num_timeout=5 \
+    hydra.launcher.comment=criticalExp \

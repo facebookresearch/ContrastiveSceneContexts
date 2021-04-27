@@ -1,0 +1,17 @@
+- net.backbone=sparseconv
+- data.dataset=scannet
+- data.num_workers=8
+- data.batch_size=8
+- data.num_points=40000
+- data.use_color=False
+- data.no_height=True
+- optimizer.learning_rate=0.001
+- data.voxelization=True
+- data.voxel_size=0.025
+- misc.log_dir=./
+- misc.num_gpus=1
+- net.is_train=False
+- test.ap_iou=0.5
+- test.phase=val
+- test.write_to_benchmark=False
+- net.weights=/rhome/jhou/data/checkpoint/data_efficient3d/scannet/data_efficient/scenes/votenet120klr01/ours/20/0/checkpoint.tar

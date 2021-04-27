@@ -1,0 +1,157 @@
+hydra:
+  run:
+    dir: ${misc.log_dir}
+  sweep:
+    dir: ${misc.log_dir}
+    subdir: ${hydra.job.num}
+  hydra_logging:
+    version: 1
+    formatters:
+      colorlog:
+        (): colorlog.ColoredFormatter
+        format: '[%(cyan)s%(asctime)s%(reset)s][%(purple)sHYDRA%(reset)s] %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: colorlog
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+      file:
+        class: logging.FileHandler
+        formatter: simple
+        filename: ${hydra.job.name}.log
+    root:
+      level: INFO
+      handlers:
+      - console
+      - file
+    disable_existing_loggers: false
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+  launcher:
+    submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+    timeout_min: 1200
+    cpus_per_task: 10
+    gpus_per_node: ${misc.num_gpus}
+    tasks_per_node: 1
+    mem_gb: 64
+    nodes: 1
+    name: ${hydra.job.name}
+    _target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+    partition: dev
+    comment: criticalEXP
+    constraint: volta32gb
+    exclude: null
+    signal_delay_s: 120
+    max_num_timeout: 3
+    additional_parameters: {}
+    array_parallelism: 256
+    setup: null
+  help:
+    app_name: ${hydra.job.name}
+    header: '${hydra.help.app_name} is powered by Hydra.
+
+      '
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help
+
+      '
+    template: '${hydra.help.header}
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (group=option)
+
+
+      $APP_CONFIG_GROUPS
+
+
+      == Config ==
+
+      Override anything in the config (foo.bar=value)
+
+
+      $CONFIG
+
+
+      ${hydra.help.footer}
+
+      '
+  hydra_help:
+    hydra_help: ???
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+  output_subdir: .hydra
+  overrides:
+    hydra: []
+    task:
+    - net.backbone=sparseconv
+    - data.dataset=scannet
+    - data.num_workers=8
+    - data.batch_size=8
+    - data.num_points=40000
+    - data.use_color=False
+    - data.no_height=True
+    - optimizer.learning_rate=0.001
+    - data.voxelization=True
+    - data.voxel_size=0.025
+    - misc.log_dir=./
+    - misc.num_gpus=1
+    - net.is_train=False
+    - test.ap_iou=0.5
+    - test.phase=val
+    - test.write_to_benchmark=False
+    - net.weights=/rhome/jhou/data/checkpoint/data_efficient3d/scannet/data_efficient/scenes/votenet120klr01/ours/20/0/checkpoint.tar
+  job:
+    name: ddp_main
+    override_dirname: data.batch_size=8,data.dataset=scannet,data.no_height=True,data.num_points=40000,data.num_workers=8,data.use_color=False,data.voxel_size=0.025,data.voxelization=True,misc.log_dir=./,misc.num_gpus=1,net.backbone=sparseconv,net.is_train=False,net.weights=/rhome/jhou/data/checkpoint/data_efficient3d/scannet/data_efficient/scenes/votenet120klr01/ours/20/0/checkpoint.tar,optimizer.learning_rate=0.001,test.ap_iou=0.5,test.phase=val,test.write_to_benchmark=False
+    id: ???
+    num: ???
+    config_name: default.yaml
+    env_set: {}
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.0.0
+    cwd: /rhome/jhou/csc/downstream/votenet
+  verbose: false

@@ -1,0 +1,56 @@
+net:
+  model: votenet
+  is_train: false
+  backbone: sparseconv
+  weights: /rhome/jhou/data/checkpoint/data_efficient3d/scannet/data_efficient/scenes/votenet120klr01/ours/20/0/checkpoint.tar
+  num_target: 256
+  vote_factor: 1
+  cluster_sampling: vote_fps
+data:
+  dataset: scannet
+  by_scenes: null
+  by_points: null
+  num_points: 40000
+  num_workers: 8
+  batch_size: 8
+  no_height: true
+  use_color: false
+  use_sunrgbd_v2: false
+  overwrite: false
+  dump_results: false
+  voxelization: true
+  voxel_size: 0.025
+  shuffle_datast: false
+optimizer:
+  max_epoch: 180
+  learning_rate: 0.001
+  lr_decay_steps:
+  - 80
+  - 120
+  - 160
+  lr_decay_rates:
+  - 0.1
+  - 0.1
+  - 0.1
+  weight_decay: 0
+  bn_decay_step: 80
+  bn_decay_rate: 0.5
+test:
+  use_3d_nms: true
+  use_cls_nms: true
+  use_old_type_nms: false
+  per_class_proposal: true
+  nms_iou: 0.25
+  conf_thresh: 0.05
+  faster_eval: False,
+  ap_iou_thresholds:
+  - 0.25
+  - 0.5
+  save_vis: false
+  ap_iou: 0.5
+  write_to_benchmark: false
+  phase: val
+misc:
+  log_dir: ./
+  num_gpus: 1
+  seed: 0
