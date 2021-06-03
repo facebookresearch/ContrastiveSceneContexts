@@ -144,5 +144,5 @@ def generate_splits(stanford_out_path, suffix='ply'):
 
 
 if __name__ == '__main__':
-  #Stanford3DDatasetConverter.convert_to_ply(STANFORD_3D_IN_PATH, STANFORD_3D_OUT_PATH, save_pth=True)
+  Stanford3DDatasetConverter.convert_to_ply(STANFORD_3D_IN_PATH, STANFORD_3D_OUT_PATH, save_pth=True)
   generate_splits(STANFORD_3D_OUT_PATH, 'pth')

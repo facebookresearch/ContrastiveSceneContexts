@@ -75,7 +75,7 @@ This *overlap30.txt* should be put into folder *TARGET/splits*.
 
 ### Pre-training
 Our codebase enables multi-gpu training with distributed data parallel (DDP) module in pytorch. 
-To train PointContrast with 8 GPUs (batch_size=32, 4 per GPU) on a single server:
+To train ContrastiveSceneContexts with 8 GPUs (batch_size=32, 4 per GPU) on a single server:
 
 ```
 cd pretrain/contrastive_scene_contexts
@@ -88,11 +88,13 @@ OUT_DIR=./output DATASET=ROOT_PATH_OF_DATA scripts/pretrain_pointnet2.sh
 ## ScanNet Downstream Tasks
 
 ### Data Pre-Processing
-We provide the code for pre-processing the data for ScanNet downstream tasks. One can run following code to generate the training data for semantic segmentation and instance segmentation.
+We provide the code for pre-processing the data for ScanNet downstream tasks. One can run following code to generate the training data for semantic segmentation and instance segmentation. We use SCANNET_DATA to refer where scannet data lives and SCANNET_OUT_PATH to denote the output path of processed scannet data.
 ```
-# Edit path variables, SCANNET_OUT_PATH
-cd downstream/semseg/lib/datasets/preprocessing
-python scannet.py
+# Edit path variables: SCANNET_DATA and SCANNET_OUT_PATH
+cd downstream/semseg/lib/datasets/preprocessing/scannet
+python scannet.py --input SCANNET_DATA --output SCANNET_OUT_PATH
+# copy the filelists
+cp -r split SCANNET_OUT_PATH
 ```
 For ScanNet detection data generation, please refer to [VoteNet ScanNet Data](https://github.com/facebookresearch/votenet/tree/master/scannet). Run command to soft link the generated detection data (located in PATH_DET_DATA) to following location:
 
@@ -267,7 +269,7 @@ LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_scannet.sh
 We provide the code for pre-processing the data for Stanford3D (S3DIS) downstream tasks. One can run following code to generate the training data for semantic segmentation and instance segmentation.
 ```
 # Edit path variables, STANFORD_3D_OUT_PATH
-cd downstream/semseg/lib/datasets/preprocessing
+cd downstream/semseg/lib/datasets/preprocessing/stanford
 python stanford.py
 ```
 
