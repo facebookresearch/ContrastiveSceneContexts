@@ -75,7 +75,7 @@ This *overlap30.txt* should be put into folder *TARGET/splits*.
 
 ### Pre-training
 Our codebase enables multi-gpu training with distributed data parallel (DDP) module in pytorch. 
-To train PointContrast with 8 GPUs (batch_size=32, 4 per GPU) on a single server:
+To train ContrastiveSceneContexts with 8 GPUs (batch_size=32, 4 per GPU) on a single server:
 
 ```
 cd pretrain/contrastive_scene_contexts
@@ -88,11 +88,13 @@ OUT_DIR=./output DATASET=ROOT_PATH_OF_DATA scripts/pretrain_pointnet2.sh
 ## ScanNet Downstream Tasks
 
 ### Data Pre-Processing
-We provide the code for pre-processing the data for ScanNet downstream tasks. One can run following code to generate the training data for semantic segmentation and instance segmentation.
+We provide the code for pre-processing the data for ScanNet downstream tasks. One can run following code to generate the training data for semantic segmentation and instance segmentation. We use SCANNET_DATA to refer where scannet data lives and SCANNET_OUT_PATH to denote the output path of processed scannet data.
 ```
-# Edit path variables, SCANNET_OUT_PATH
-cd downstream/semseg/lib/datasets/preprocessing
-python scannet.py
+# Edit path variables: SCANNET_DATA and SCANNET_OUT_PATH
+cd downstream/semseg/lib/datasets/preprocessing/scannet
+python scannet.py --input SCANNET_DATA --output SCANNET_OUT_PATH
+# copy the filelists
+cp -r split SCANNET_OUT_PATH
 ```
 For ScanNet detection data generation, please refer to [VoteNet ScanNet Data](https://github.com/facebookresearch/votenet/tree/master/scannet). Run command to soft link the generated detection data (located in PATH_DET_DATA) to following location:
 
@@ -255,10 +257,10 @@ LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_scannet.sh
 | 80% scenes              | 36.3        | 56.3         | [download][partition8_4096_60k]          | [download][scannet_det_scene80_weight]           | [link][scannet_det_scene80_log]           |[link][scannet_det_scene80_tensorboard]            |
 | 100% scenes             | 39.3        | 59.1         | [download][partition4_4096_100k]          | [download][scannet_det_scene100_weight]          | [link][scannet_det_scene100_log]          |[link][scannet_det_scene100_tensorboard]           |
 | 100% scenes (PointNet++)| 39.2        | 62.5         | [download][partition8_4096_15k_pointnet2]| [download][scannet_det_scene100_weight_pointnet2]| [link][scannet_det_scene100_log_pointnet2]|[link][scannet_det_scene100_tensorboard_pointnet2] |
-| 1 bboxes                | 30.3        | 54.5         | [download][partition8_4096_60k]          | [download][scannet_det_bbox1_weight]             | [link][scannet_det_bbox1_log]             |[link][scannet_det_bbox1_tensorboard]              |
-| 2 bboxes                | 32.4        | 55.3         | [download][partition8_4096_60k]          | [download][scannet_det_bbox2_weight]             | [link][scannet_det_bbox2_log]             |[link][scannet_det_bbox2_tensorboard]              |
-| 4 bboxes                | 34.6        | 58.9         | [download][partition8_4096_60k]          | [download][scannet_det_bbox4_weight]             | [link][scannet_det_bbox4_log]             |[link][scannet_det_bbox4_tensorboard]              |
-| 7 bboxes                | 35.9        | 59.7         | [download][partition8_4096_60k]          | [download][scannet_det_bbox7_weight]             | [link][scannet_det_bbox7_log]             |[link][scannet_det_bbox7_tensorboard]              |
+| 1 bboxes                | 10.9        | 24.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox1_weight]             | [link][scannet_det_bbox1_log]             |[link][scannet_det_bbox1_tensorboard]              |
+| 2 bboxes                | 18.5        | 36.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox2_weight]             | [link][scannet_det_bbox2_log]             |[link][scannet_det_bbox2_tensorboard]              |
+| 4 bboxes                | 26.1        | 45.9         | [download][partition8_4096_100k]          | [download][scannet_det_bbox4_weight]             | [link][scannet_det_bbox4_log]             |[link][scannet_det_bbox4_tensorboard]              |
+| 7 bboxes                | 30.4        | 52.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox7_weight]             | [link][scannet_det_bbox7_log]             |[link][scannet_det_bbox7_tensorboard]              |
 
 
 ## Stanford 3D (S3DIS) Fine-tuning
@@ -267,7 +269,7 @@ LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_scannet.sh
 We provide the code for pre-processing the data for Stanford3D (S3DIS) downstream tasks. One can run following code to generate the training data for semantic segmentation and instance segmentation.
 ```
 # Edit path variables, STANFORD_3D_OUT_PATH
-cd downstream/semseg/lib/datasets/preprocessing
+cd downstream/semseg/lib/datasets/preprocessing/stanford
 python stanford.py
 ```
 
@@ -484,10 +486,10 @@ Contrastive Scene Contexts is relased under the MIT License. See the LICENSE fil
 [scannet_det_scene80_tensorboard]:            https://tensorboard.dev/experiment/pqPs53A6QqOowJJhxlF5JA 
 [scannet_det_scene100_tensorboard]:           https://tensorboard.dev/experiment/4IVxpdGPQx6WodGsPYqfwg 
 [scannet_det_scene100_tensorboard_pointnet2]: https://tensorboard.dev/experiment/Wx2b0VZoRkSWKasbqlj89Q 
-[scannet_det_bbox1_tensorboard]:              https://tensorboard.dev/experiment/qOMRglilSJa8kjqyGC2t4A
-[scannet_det_bbox2_tensorboard]:              https://tensorboard.dev/experiment/FbQAlCxySZWDf5cpN4ujEA 
-[scannet_det_bbox4_tensorboard]:              https://tensorboard.dev/experiment/cvQBcXuVTxOiYPQ6XWke9A 
-[scannet_det_bbox7_tensorboard]:              https://tensorboard.dev/experiment/J9l4aeZGS7mWux5IxGIPtw 
+[scannet_det_bbox1_tensorboard]:              https://tensorboard.dev/experiment/QDCyZnBIRQmzxviraLMZsQ
+[scannet_det_bbox2_tensorboard]:              https://tensorboard.dev/experiment/gdQe0t9qQOeHbP9Ali82hw
+[scannet_det_bbox4_tensorboard]:              https://tensorboard.dev/experiment/8afOYz5BTW2qJtoRNUWZWA
+[scannet_det_bbox7_tensorboard]:              https://tensorboard.dev/experiment/vqp27jVKTKmjAhzXDyPetQ
 [sunrgbd_det_tensorboard]:                    https://tensorboard.dev/experiment/NwUnUEfZQC2qwczbb4L2Kg 
 [stanford_ins_tensorboard]:                   https://tensorboard.dev/experiment/NZLO4hVRQzijDa2cJliVlg/#scalars&_smoothingWeight=0
 [stanford_sem_tensorboard]:                   https://tensorboard.dev/experiment/yjNN3RE0SQKMgwRRpG0aYw/#scalars&_smoothingWeight=0
