@@ -257,10 +257,10 @@ LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_scannet.sh
 | 80% scenes              | 36.3        | 56.3         | [download][partition8_4096_60k]          | [download][scannet_det_scene80_weight]           | [link][scannet_det_scene80_log]           |[link][scannet_det_scene80_tensorboard]            |
 | 100% scenes             | 39.3        | 59.1         | [download][partition4_4096_100k]          | [download][scannet_det_scene100_weight]          | [link][scannet_det_scene100_log]          |[link][scannet_det_scene100_tensorboard]           |
 | 100% scenes (PointNet++)| 39.2        | 62.5         | [download][partition8_4096_15k_pointnet2]| [download][scannet_det_scene100_weight_pointnet2]| [link][scannet_det_scene100_log_pointnet2]|[link][scannet_det_scene100_tensorboard_pointnet2] |
-| 1 bboxes                | 30.3        | 54.5         | [download][partition8_4096_60k]          | [download][scannet_det_bbox1_weight]             | [link][scannet_det_bbox1_log]             |[link][scannet_det_bbox1_tensorboard]              |
-| 2 bboxes                | 32.4        | 55.3         | [download][partition8_4096_60k]          | [download][scannet_det_bbox2_weight]             | [link][scannet_det_bbox2_log]             |[link][scannet_det_bbox2_tensorboard]              |
-| 4 bboxes                | 34.6        | 58.9         | [download][partition8_4096_60k]          | [download][scannet_det_bbox4_weight]             | [link][scannet_det_bbox4_log]             |[link][scannet_det_bbox4_tensorboard]              |
-| 7 bboxes                | 35.9        | 59.7         | [download][partition8_4096_60k]          | [download][scannet_det_bbox7_weight]             | [link][scannet_det_bbox7_log]             |[link][scannet_det_bbox7_tensorboard]              |
+| 1 bboxes                | 10.9        | 24.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox1_weight]             | [link][scannet_det_bbox1_log]             |[link][scannet_det_bbox1_tensorboard]              |
+| 2 bboxes                | 18.5        | 36.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox2_weight]             | [link][scannet_det_bbox2_log]             |[link][scannet_det_bbox2_tensorboard]              |
+| 4 bboxes                | 26.1        | 45.9         | [download][partition8_4096_100k]          | [download][scannet_det_bbox4_weight]             | [link][scannet_det_bbox4_log]             |[link][scannet_det_bbox4_tensorboard]              |
+| 7 bboxes                | 30.4        | 52.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox7_weight]             | [link][scannet_det_bbox7_log]             |[link][scannet_det_bbox7_tensorboard]              |
 
 
 ## Stanford 3D (S3DIS) Fine-tuning
@@ -486,10 +486,10 @@ Contrastive Scene Contexts is relased under the MIT License. See the LICENSE fil
 [scannet_det_scene80_tensorboard]:            https://tensorboard.dev/experiment/pqPs53A6QqOowJJhxlF5JA 
 [scannet_det_scene100_tensorboard]:           https://tensorboard.dev/experiment/4IVxpdGPQx6WodGsPYqfwg 
 [scannet_det_scene100_tensorboard_pointnet2]: https://tensorboard.dev/experiment/Wx2b0VZoRkSWKasbqlj89Q 
-[scannet_det_bbox1_tensorboard]:              https://tensorboard.dev/experiment/qOMRglilSJa8kjqyGC2t4A
-[scannet_det_bbox2_tensorboard]:              https://tensorboard.dev/experiment/FbQAlCxySZWDf5cpN4ujEA 
-[scannet_det_bbox4_tensorboard]:              https://tensorboard.dev/experiment/cvQBcXuVTxOiYPQ6XWke9A 
-[scannet_det_bbox7_tensorboard]:              https://tensorboard.dev/experiment/J9l4aeZGS7mWux5IxGIPtw 
+[scannet_det_bbox1_tensorboard]:              https://tensorboard.dev/experiment/QDCyZnBIRQmzxviraLMZsQ
+[scannet_det_bbox2_tensorboard]:              https://tensorboard.dev/experiment/gdQe0t9qQOeHbP9Ali82hw
+[scannet_det_bbox4_tensorboard]:              https://tensorboard.dev/experiment/8afOYz5BTW2qJtoRNUWZWA
+[scannet_det_bbox7_tensorboard]:              https://tensorboard.dev/experiment/vqp27jVKTKmjAhzXDyPetQ
 [sunrgbd_det_tensorboard]:                    https://tensorboard.dev/experiment/NwUnUEfZQC2qwczbb4L2Kg 
 [stanford_ins_tensorboard]:                   https://tensorboard.dev/experiment/NZLO4hVRQzijDa2cJliVlg/#scalars&_smoothingWeight=0
 [stanford_sem_tensorboard]:                   https://tensorboard.dev/experiment/yjNN3RE0SQKMgwRRpG0aYw/#scalars&_smoothingWeight=0

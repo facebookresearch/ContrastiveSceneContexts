@@ -116,6 +116,9 @@ class ScannetDetectionDataset(Dataset):
             semantic_labels[mask_nonvalid] = -1
             instance_labels[mask_nonvalid] = -1
 
+            if len(instance_bboxes) != 0:
+                instance_bboxes = instance_bboxes[sampled_bbox]
+
 
         # subsampling happens here
 
