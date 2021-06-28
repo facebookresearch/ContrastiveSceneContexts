@@ -86,8 +86,8 @@ class ShapeContext(object):
         partition_matrix = partition_matrix.cuda() -1e9
         
         rel_trans = ShapeContext.compute_rel_trans(xyz, xyz)
-        maskUp = rel_trans[:,:,2] > self.r1
-        maskDown = rel_trans[:,:,2] > self.r1
+        maskUp = rel_trans[:,:,2] > 0.0
+        maskDown = rel_trans[:,:,2] < 0.0
         
         distance_matrix = ShapeContext.pdist(rel_trans)
 
