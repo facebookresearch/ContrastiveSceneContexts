@@ -1,6 +1,6 @@
 # Exploring Data-Efficient 3D Scene Understanding with Contrastive Scene Contexts
 
-![PointContrast](assets/teaser.jpg)
+![](assets/teaser.jpg)
 
 The rapid progress in 3D scene understanding has come with growing demand for data; however, collecting and annotating 3D scenes (e.g. point clouds) are notoriously hard. For example, the number of scenes (e.g. indoor rooms) that can be accessed and scanned might be limited; even given sufficient data, acquiring 3D labels (e.g. instance masks) requires intensive human labor. In this paper, we explore data-efficient learning for 3D point cloud. As a first step towards this direction, we propose Contrastive Scene Contexts, a 3D pre-training method that makes use of both point-level correspondences and spatial contexts in a scene. Our method achieves state-of-the-art results on a suite of benchmarks where training data or labels are scarce. Our study reveals that exhaustive labelling of 3D point clouds might be unnecessary; and remarkably, on ScanNet, even using 0.1% of point labels, we still achieve 89% (instance segmentation) and 96% (semantic segmentation) of the baseline performance that uses full annotations.
 
@@ -144,17 +144,17 @@ cd downstream/semseg/
 DATAPATH=SCANNET_OUT_PATH LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_scannet.sh
 ```
 
-| Training Data | mIoU (val) | Initialization                  | Pre-trained Model                       | Logs                                 | Tensorboard   |
-|---------------|------------|---------------------------------|-----------------------------------------|--------------------------------------|------------------------------------------|
-| 1% scenes     | 29.3       | [download][partition8_4096_60k] | [download][scannet_sem_scene1_weight]   | [link][scannet_sem_scene1_log]   | [link][scannet_sem_scene1_20_tensorboard]   |
-| 5% scenes     | 45.4       | [download][partition8_4096_60k] | [download][scannet_sem_scene5_weight]   | [link][scannet_sem_scene5_log]   | [link][scannet_sem_scene1_20_tensorboard]   |
-| 10% scenes    | 59.5       | [download][partition8_4096_60k] | [download][scannet_sem_scene10_weight]  | [link][scannet_sem_scene10_log]  | [link][scannet_sem_scene1_20_tensorboard]  |
-| 20% scenes    | 64.1       | [download][partition8_4096_60k] | [download][scannet_sem_scene20_weight]  | [link][scannet_sem_scene20_log]  | [link][scannet_sem_scene1_20_tensorboard]  |
-| 100% scenes   | 73.8       | [download][partition8_4096_100k] | [download][scannet_sem_scene100_weight] | [link][scannet_sem_scene100_log] | [link][scannet_sem_scene100_tensorboard] |
-| 20 points     | 53.8       | [download][partition8_4096_60k] | [download][scannet_sem_point20_weight]  | [link][scannet_sem_point20_log]  | [link][scannet_sem_point20_200_tensorboard]  |
-| 50 points     | 62.9       | [download][partition8_4096_60k] | [download][scannet_sem_point50_weight]  | [link][scannet_sem_point50_log]  | [link][scannet_sem_point20_200_tensorboard]  |
-| 100 points    | 66.9       | [download][partition8_4096_60k] | [download][scannet_sem_point100_weight] | [link][scannet_sem_point100_log] | [link][scannet_sem_point20_200_tensorboard] |
-| 200 points    | 69.0       | [download][partition8_4096_60k] | [download][scannet_sem_point200_weight] | [link][scannet_sem_point200_log] | [link][scannet_sem_point20_200_tensorboard] |
+| Training Data | mIoU (val) | Pre-trained Model Used (for initialization)   | Logs                                 | Curves                                      |  Model                              |
+|---------------|------------|-----------------------------------------------|--------------------------------------|---------------------------------------------|-------------------------------------|
+| 1% scenes     | 29.3       | [download][partition8_4096_60k]               | [link][scannet_sem_scene1_log]       | [link][scannet_sem_scene1_20_tensorboard]   | [link][scannet_sem_scene1_weight]   |
+| 5% scenes     | 45.4       | [download][partition8_4096_60k]               | [link][scannet_sem_scene5_log]       | [link][scannet_sem_scene1_20_tensorboard]   | [link][scannet_sem_scene5_weight]   |
+| 10% scenes    | 59.5       | [download][partition8_4096_60k]               | [link][scannet_sem_scene10_log]      | [link][scannet_sem_scene1_20_tensorboard]   | [link][scannet_sem_scene10_weight]  |
+| 20% scenes    | 64.1       | [download][partition8_4096_60k]               | [link][scannet_sem_scene20_log]      | [link][scannet_sem_scene1_20_tensorboard]   | [link][scannet_sem_scene20_weight]  |
+| 100% scenes   | 73.8       | [download][partition8_4096_100k]              | [link][scannet_sem_scene100_log]     | [link][scannet_sem_scene100_tensorboard]    | [link][scannet_sem_scene100_weight] |
+| 20 points     | 53.8       | [download][partition8_4096_60k]               | [link][scannet_sem_point20_log]      | [link][scannet_sem_point20_200_tensorboard] | [link][scannet_sem_point20_weight]  |
+| 50 points     | 62.9       | [download][partition8_4096_60k]               | [link][scannet_sem_point50_log]      | [link][scannet_sem_point20_200_tensorboard] | [link][scannet_sem_point50_weight]  |
+| 100 points    | 66.9       | [download][partition8_4096_60k]               | [link][scannet_sem_point100_log]     | [link][scannet_sem_point20_200_tensorboard] | [link][scannet_sem_point100_weight] |
+| 200 points    | 69.0       | [download][partition8_4096_60k]               | [link][scannet_sem_point200_log]     | [link][scannet_sem_point20_200_tensorboard] | [link][scannet_sem_point200_weight] |
 
 ### Instance Segmentation
 We provide code for the instance segmentation experiments conducted in our paper. Our code supports **multi-gpu training**. To train with 8 GPUs on a single server, 
@@ -200,18 +200,18 @@ DATAPATH=SCANNET_DATA LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_s
 ```
 
 
-| Training Data    | mAP@0.5 (val)        | Initialization                        | Pre-trained Model                    | Logs                              | Curves                                   |
-|---------------|---------------------|-----------------------------|--------------------------------------|-----------------------------------|-------------------------------------------|
-| 1% scenes     | 12.3                | [download][partition8_4096_60k] | [download][scannet_ins_scene1_weight]    | [link][scannet_ins_scene1_log]    | [link][scannet_ins_scene1_20_tensorboard]    |
-| 5% scenes     | 33.9                | [download][partition8_4096_60k] | [download][scannet_ins_scene5_weight]    | [link][scannet_ins_scene5_log]    | [link][scannet_ins_scene1_20_tensorboard]    |
-| 10% scenes    | 45.3                | [download][partition8_4096_60k] | [download][scannet_ins_scene10_weight]   | [link][scannet_ins_scene10_log]   | [link][scannet_ins_scene1_20_tensorboard]   |
-| 20% scenes    | 49.8                | [download][partition8_4096_60k] | [download][scannet_ins_scene20_weight]   | [link][scannet_ins_scene20_log]   | [link][scannet_ins_scene1_20_tensorboard]   |
-| 100% scenes   | 59.4                | [download][partition8_4096_60k] | [download][scannet_ins_scene100_weight]  | [link][scannet_ins_scene100_log]  | [link][scannet_ins_scene100_tensorboard]  |
-| 20 points     | 27.2                | [download][partition8_4096_60k] | [download][scannet_ins_point20_weight]   | [link][scannet_ins_point20_log]   | [link][scannet_ins_point20_200_tensorboard]   |
-| 50 points     | 35.7                | [download][partition8_4096_60k] | [download][scannet_ins_point50_weight]   | [link][scannet_ins_point50_log]   | [link][scannet_ins_point20_200_tensorboard]   |
-| 100 points    | 43.6                | [download][partition8_4096_60k] | [download][scannet_ins_point100_weight]  | [link][scannet_ins_point100_log]  | [link][scannet_ins_point20_200_tensorboard]  |
-| 200 points    | 50.4                | [download][partition8_4096_60k] | [download][scannet_ins_point200_weight]  | [link][scannet_ins_point200_log]  | [link][scannet_ins_point20_200_tensorboard]  |
-| train + val   | 76.5 (64.8 on test) | [download][partition8_4096_60k] | [download][scannet_ins_benchmark_weight] | [link][scannet_ins_benchmark_log] | [link][scannet_ins_benchmark_tensorboard] |
+| Training Data    | mAP@0.5 (val)    | Pre-trained Model Used (for initialization) | Logs                              | Curves                                      |  Model                               |
+|---------------|---------------------|---------------------------------------------|-----------------------------------|---------------------------------------------|--------------------------------------|
+| 1% scenes     | 12.3                | [download][partition8_4096_60k]             | [link][scannet_ins_scene1_log]    | [link][scannet_ins_scene1_20_tensorboard]   | [link][scannet_ins_scene1_weight]    |
+| 5% scenes     | 33.9                | [download][partition8_4096_60k]             | [link][scannet_ins_scene5_log]    | [link][scannet_ins_scene1_20_tensorboard]   | [link][scannet_ins_scene5_weight]    |
+| 10% scenes    | 45.3                | [download][partition8_4096_60k]             | [link][scannet_ins_scene10_log]   | [link][scannet_ins_scene1_20_tensorboard]   | [link][scannet_ins_scene10_weight]   |
+| 20% scenes    | 49.8                | [download][partition8_4096_60k]             | [link][scannet_ins_scene20_log]   | [link][scannet_ins_scene1_20_tensorboard]   | [link][scannet_ins_scene20_weight]   |
+| 100% scenes   | 59.4                | [download][partition8_4096_60k]             | [link][scannet_ins_scene100_log]  | [link][scannet_ins_scene100_tensorboard]    | [link][scannet_ins_scene100_weight]  |
+| 20 points     | 27.2                | [download][partition8_4096_60k]             | [link][scannet_ins_point20_log]   | [link][scannet_ins_point20_200_tensorboard] | [link][scannet_ins_point20_weight]   |
+| 50 points     | 35.7                | [download][partition8_4096_60k]             | [link][scannet_ins_point50_log]   | [link][scannet_ins_point20_200_tensorboard] | [link][scannet_ins_point50_weight]   |
+| 100 points    | 43.6                | [download][partition8_4096_60k]             | [link][scannet_ins_point100_log]  | [link][scannet_ins_point20_200_tensorboard] | [link][scannet_ins_point100_weight]  |
+| 200 points    | 50.4                | [download][partition8_4096_60k]             | [link][scannet_ins_point200_log]  | [link][scannet_ins_point20_200_tensorboard] | [link][scannet_ins_point200_weight]  |
+| train + val   | 76.5 (64.8 on test) | [download][partition8_4096_60k]             | [link][scannet_ins_benchmark_log] | [link][scannet_ins_benchmark_tensorboard]   | [link][scannet_ins_benchmark_weight] |
 
 
 ### 3D Object Detection
@@ -249,18 +249,18 @@ cd downstream/votenet/
 LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_scannet.sh
 ```
 
-| Training Data           | mAP@0.5 (val)| mAP@0.25 (val)| Initialize                                 | Pre-trained Model                            |  Logs                                     | Curves                                           |
-|-------------------------|-------------|--------------|--------------------------------------|----------------------------------------------|-------------------------------------------|---------------------------------------------------|
-| 10% scenes              | 9.9         | 24.7         | [download][partition8_4096_60k]          | [download][scannet_det_scene10_weight]           | [link][scannet_det_scene10_log]           |[link][scannet_det_scene10_tensorboard]            |
-| 20% scenes              | 21.4        | 41.4         | [download][partition8_4096_60k]          | [download][scannet_det_scene20_weight]           | [link][scannet_det_scene20_log]           |[link][scannet_det_scene20_tensorboard]            |
-| 40% scenes              | 29.5        | 52.0         | [download][partition8_4096_60k]          | [download][scannet_det_scene40_weight]           | [link][scannet_det_scene40_log]           |[link][scannet_det_scene40_tensorboard]            |
-| 80% scenes              | 36.3        | 56.3         | [download][partition8_4096_60k]          | [download][scannet_det_scene80_weight]           | [link][scannet_det_scene80_log]           |[link][scannet_det_scene80_tensorboard]            |
-| 100% scenes             | 39.3        | 59.1         | [download][partition4_4096_100k]          | [download][scannet_det_scene100_weight]          | [link][scannet_det_scene100_log]          |[link][scannet_det_scene100_tensorboard]           |
-| 100% scenes (PointNet++)| 39.2        | 62.5         | [download][partition8_4096_15k_pointnet2]| [download][scannet_det_scene100_weight_pointnet2]| [link][scannet_det_scene100_log_pointnet2]|[link][scannet_det_scene100_tensorboard_pointnet2] |
-| 1 bboxes                | 10.9        | 24.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox1_weight]             | [link][scannet_det_bbox1_log]             |[link][scannet_det_bbox1_tensorboard]              |
-| 2 bboxes                | 18.5        | 36.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox2_weight]             | [link][scannet_det_bbox2_log]             |[link][scannet_det_bbox2_tensorboard]              |
-| 4 bboxes                | 26.1        | 45.9         | [download][partition8_4096_100k]          | [download][scannet_det_bbox4_weight]             | [link][scannet_det_bbox4_log]             |[link][scannet_det_bbox4_tensorboard]              |
-| 7 bboxes                | 30.4        | 52.5         | [download][partition8_4096_100k]          | [download][scannet_det_bbox7_weight]             | [link][scannet_det_bbox7_log]             |[link][scannet_det_bbox7_tensorboard]              |
+| Training Data           | mAP@0.5 (val)| mAP@0.25 (val)| Pre-trained Model Used (for initialization)    |  Logs                                     | Curves                                            | Model                                            |
+|-------------------------|-------------|----------------|------------------------------------------------|-------------------------------------------|---------------------------------------------------|--------------------------------------------------|
+| 10% scenes              | 9.9         | 24.7           | [download][partition8_4096_60k]                | [link][scannet_det_scene10_log]           |[link][scannet_det_scene10_tensorboard]            | [link][scannet_det_scene10_weight]               |
+| 20% scenes              | 21.4        | 41.4           | [download][partition8_4096_60k]                | [link][scannet_det_scene20_log]           |[link][scannet_det_scene20_tensorboard]            | [link][scannet_det_scene20_weight]               |
+| 40% scenes              | 29.5        | 52.0           | [download][partition8_4096_60k]                | [link][scannet_det_scene40_log]           |[link][scannet_det_scene40_tensorboard]            | [link][scannet_det_scene40_weight]               |
+| 80% scenes              | 36.3        | 56.3           | [download][partition8_4096_60k]                | [link][scannet_det_scene80_log]           |[link][scannet_det_scene80_tensorboard]            | [link][scannet_det_scene80_weight]               |
+| 100% scenes             | 39.3        | 59.1           | [download][partition4_4096_100k]               | [link][scannet_det_scene100_log]          |[link][scannet_det_scene100_tensorboard]           | [link][scannet_det_scene100_weight]              |
+| 100% scenes (PointNet++)| 39.2        | 62.5           | [download][partition8_4096_15k_pointnet2]      | [link][scannet_det_scene100_log_pointnet2]|[link][scannet_det_scene100_tensorboard_pointnet2] | [link][scannet_det_scene100_weight_pointnet2]    |
+| 1 bboxes                | 10.9        | 24.5           | [download][partition8_4096_100k]               | [link][scannet_det_bbox1_log]             |[link][scannet_det_bbox1_tensorboard]              | [link][scannet_det_bbox1_weight]                 |
+| 2 bboxes                | 18.5        | 36.5           | [download][partition8_4096_100k]               | [link][scannet_det_bbox2_log]             |[link][scannet_det_bbox2_tensorboard]              | [link][scannet_det_bbox2_weight]                 |
+| 4 bboxes                | 26.1        | 45.9           | [download][partition8_4096_100k]               | [link][scannet_det_bbox4_log]             |[link][scannet_det_bbox4_tensorboard]              | [link][scannet_det_bbox4_weight]                 |
+| 7 bboxes                | 30.4        | 52.5           | [download][partition8_4096_100k]               | [link][scannet_det_bbox7_log]             |[link][scannet_det_bbox7_tensorboard]              | [link][scannet_det_bbox7_weight]                 |
 
 
 ## Stanford 3D (S3DIS) Fine-tuning
@@ -291,9 +291,9 @@ We provide our pre-trained model and log file for reference. You can evalutate o
 cd downstream/semseg/
 DATAPATH=STANFORD_3D_OUT_PATH LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_stanford3d.sh
 ```
-| Training Data   | mIoU (val) | Initialization                 |  Pre-trained Model              |Logs                        | Tensorboard                          |
-|-----------------|------------|--------------------------------|---------------------------------|----------------------------|--------------------------------------|
-| 100% scenes     | 72.2       |[download][partition8_4096_20k] | [download][stanford_sem_weight] |[link][stanford_sem_log]| [link][stanford_sem_tensorboard]|
+| Training Data   | mIoU (val) | Pre-trained Model Used (for initialization)   |Logs                        | Curves                           |  Model                       |
+|-----------------|------------|-----------------------------------------------|----------------------------|----------------------------------|------------------------------|
+| 100% scenes     | 72.2       |[download][partition8_4096_100k]               |[link][stanford_sem_log_]   | [link][stanford_sem_tensorboard_]| [link][stanford_sem_weight_] |
 
 ###  Instance Segmentation
 
@@ -313,9 +313,9 @@ We provide our pre-trained model and log file for reference. You can evaluate ou
 cd downstream/insseg/
 DATAPATH=STANFORD_3D_OUT_PATH LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_stanford3d.sh
 ```
-| Training Data     | mAP@0.5 (val)     | Initialization                  |  Pre-trained Model              |Logs                         | Tensorboard                         |
-|-------------------|-------------------|---------------------------------|---------------------------------|-----------------------------|-------------------------------------|
-| 100% scenes       | 63.4              | [download][partition8_4096_20k] | [download][stanford_ins_weight] |[link][stanford_ins_log] | [link][stanford_ins_tensorboard]|
+| Training Data     | mAP@0.5 (val)     | Pre-trained Model Used (for initialization) |Logs                         | Curves                              |  Model                          |
+|-------------------|-------------------|---------------------------------------------|-----------------------------|-------------------------------------|---------------------------------|
+| 100% scenes       | 63.4              | [download][partition8_4096_20k]             |[link][stanford_ins_log]     | [link][stanford_ins_tensorboard]    | [link][stanford_ins_weight]     |
 
 ## SUN-RGBD Fine-tuning
 
@@ -348,18 +348,19 @@ cd downstream/votenet/
 LOG_DIR=./output PRETRAIN=PATH_CHECKPOINT ./scripts/test_sunrgbd.sh
 ```
 
-| Training Data  | mAP@0.5 (val)      | mAP@0.25 (val)     | Initialize                            | Pre-trained Model                  |  Log                       | Curve                              |
-|----------------|-------------------|-------------------|----------------------------------|------------------------------------|-----------------------------|------------------------------------| 
-| 100% scenes    | 36.4              |    58.9           | [download][partition4_4096_100k] | [download][sunrgbd_det_weight]     | [link][sunrgbd_det_log] |[link][sunrgbd_det_tensorboard] |
+| Training Data     | mAP@0.5 (val)  | mAP@0.25 (val) | Pre-trained Model (initialization)   |  Logs                       | Curves                             | Model                              |
+|-------------------|----------------|----------------|-----------------------------------------------|-----------------------------|------------------------------------|------------------------------------| 
+| 100% scenes       | 36.4           |    58.9        | [download][partition4_4096_100k]              | [link][sunrgbd_det_log]     |[link][sunrgbd_det_tensorboard]     | [link][sunrgbd_det_weight]     |
 
 
 ## Citing our paper
 ```
-@article{hou2020exploring,
-  title={Exploring Data-Efficient 3D Scene Understanding with Contrastive Scene Contexts},
+@inproceedings{hou2021exploring,
+  title={Exploring data-efficient 3d scene understanding with contrastive scene contexts},
   author={Hou, Ji and Graham, Benjamin and Nie{\ss}ner, Matthias and Xie, Saining},
-  journal={arXiv preprint arXiv:2012.09165},
-  year={2020}
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={15587--15597},
+  year={2021}
 }
 ```
 
@@ -449,7 +450,9 @@ Contrastive Scene Contexts is relased under the MIT License. See the LICENSE fil
 
 
 [stanford_sem_weight]:      http://kaldir.vc.in.tum.de/3dsis/contrastive_scene_contexts/finetune/stanford_semseg/checkpoint_NoneRes16UNet34Cbest_val.pth
+[stanford_sem_weight_]:     http://kaldir.vc.in.tum.de/3dsis/contrastive_scene_contexts/finetune/stanford_semseg_partition8/checkpoint_Res16UNet34C_miou.pth
 [stanford_sem_log]:         http://kaldir.vc.in.tum.de/3dsis/contrastive_scene_contexts/finetune/stanford_semseg/log.txt
+[stanford_sem_log_]:        http://kaldir.vc.in.tum.de/3dsis/contrastive_scene_contexts/finetune/stanford_semseg_partition8/log.txt
 
 [stanford_ins_weight]:      http://kaldir.vc.in.tum.de/3dsis/contrastive_scene_contexts/finetune/stanford_insseg/checkpoint_Res16UNet34C_mAP.pth
 [stanford_ins_log]:         http://kaldir.vc.in.tum.de/3dsis/contrastive_scene_contexts/finetune/stanford_insseg/log.txt
@@ -493,3 +496,4 @@ Contrastive Scene Contexts is relased under the MIT License. See the LICENSE fil
 [sunrgbd_det_tensorboard]:                    https://tensorboard.dev/experiment/NwUnUEfZQC2qwczbb4L2Kg 
 [stanford_ins_tensorboard]:                   https://tensorboard.dev/experiment/NZLO4hVRQzijDa2cJliVlg/#scalars&_smoothingWeight=0
 [stanford_sem_tensorboard]:                   https://tensorboard.dev/experiment/yjNN3RE0SQKMgwRRpG0aYw/#scalars&_smoothingWeight=0
+[stanford_sem_tensorboard_]:                  https://tensorboard.dev/experiment/JZip5XrGQ6u6KU5Uau0Duw/#scalars&_smoothingWeight=0
