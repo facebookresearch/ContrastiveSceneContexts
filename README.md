@@ -46,7 +46,7 @@ Our code also depends on [PointGroup](https://github.com/Jia-Research-Lab/PointG
 ```
 # Install OPs in PointGroup by:
 conda install -c bioconda google-sparsehash
-cd downstream/semseg/lib/bfs/ops
+cd downstream/insseg/lib/bfs/ops
 python setup.py build_ext --include-dirs=YOUR_ENV_PATH/include
 python setup.py install
 
