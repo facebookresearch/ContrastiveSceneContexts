@@ -15,6 +15,7 @@ def make_open3d_point_cloud(xyz, color=None, voxel_size=None):
     if np.isnan(xyz).any():
         return None
 
+    xyz = xyz[:,:3]
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(xyz)
     if color is not None:
