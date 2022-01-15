@@ -92,7 +92,7 @@ We provide the code for pre-processing the data for ScanNet downstream tasks. On
 ```
 # Edit path variables: SCANNET_DATA and SCANNET_OUT_PATH
 cd downstream/semseg/lib/datasets/preprocessing/scannet
-python scannet.py --input SCANNET_DATA --output SCANNET_OUT_PATH
+python collect_indoor3d_data.py --input SCANNET_DATA --output SCANNET_OUT_PATH
 # copy the filelists
 cp -r split SCANNET_OUT_PATH
 ```
