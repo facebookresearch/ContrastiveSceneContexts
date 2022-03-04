@@ -16,6 +16,9 @@ This codebase was tested with the following environment configurations.
 - PyTorch 1.5.1
 - [MinkowskiEngine](https://github.com/stanfordvl/MinkowskiEngine) v0.4.3 
 
+### Dockerfile Reference
+Thanks [@zshyang](https://github.com/zshyang) for providing a dockerfile, please refer to [Issue31](https://github.com/facebookresearch/ContrastiveSceneContexts/issues/31).
+
 
 ## Installation
 
