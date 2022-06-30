@@ -113,7 +113,7 @@ def default_collate_pair_fn(list_data):
       'sinput0_C': coords_batch0,
       'sinput0_F': feats_batch0,
       'sinput0_L': label_batch0,
-      'sinput0_I': instance_batch1,
+      'sinput0_I': instance_batch0,
       'sinput1_C': coords_batch1,
       'sinput1_F': feats_batch1,
       'sinput1_L': label_batch1,
